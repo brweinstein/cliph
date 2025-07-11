@@ -1,0 +1,5 @@
+[[copy]]
+source = "styles.css"
+
+[[copy]]
+source = "katex_render.js"
