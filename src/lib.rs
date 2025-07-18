@@ -1,6 +1,10 @@
 pub mod math;
 pub mod ui;
 
+pub use math::algebra::simplify;
+pub use math::ast::{BinaryOp, Expr, UnaryOp};
+
+// Only compile this on wasm32 for Yew
 #[cfg(target_arch = "wasm32")]
 use wasm_bindgen::prelude::*;
 

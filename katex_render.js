@@ -1,12 +1,16 @@
-import { renderMathInElement as katexRender } from "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js";
+// katex_render.js
+// Define a global helper to render math in an element using KaTeX auto-render
 
-export function renderMathInElement(element) {
-    katexRender(element, {
-        delimiters: [
-            {left: "$", right: "$", display: false},
-            {left: "\\(", right: "\\)", display: false},
-            {left: "\\[", right: "\\]", display: true},
-        ],
-        throwOnError: false,
-    });
+function renderMathInElementHelper(elem) {
+  renderMathInElement(elem, {
+    delimiters: [
+      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false },
+      { left: "\\[", right: "\\]", display: true },
+    ],
+    throwOnError: false,
+  });
 }
+
+// expose globally for wasm-bindgen extern
+window.renderMathInElementHelper = renderMathInElementHelper;

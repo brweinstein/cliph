@@ -1,12 +1,13 @@
 use crate::math::ast::*;
-
 pub fn format_expr_latex(expr: &Expr) -> String {
     match expr {
         Expr::Number(n) => {
-            if n.fract() == 0.0 {
-                format!("{}", *n as i64)
+            // Extract inner f64
+            let val = n.0;
+            if val.fract() == 0.0 {
+                format!("{}", val as i64)
             } else {
-                format!("{}", n)
+                format!("{}", val)
             }
         }
         Expr::Variable(v) => v.clone(),
@@ -15,7 +16,11 @@ pub fn format_expr_latex(expr: &Expr) -> String {
             BinaryOp::Add => format!("{} + {}", format_expr_latex(a), format_expr_latex(b)),
             BinaryOp::Sub => format!("{} - {}", format_expr_latex(a), format_expr_latex(b)),
             BinaryOp::Mul => format!("{} {}", format_expr_latex(a), format_expr_latex(b)),
-            BinaryOp::Div => format!("\\frac{{{}}}{{{}}}", format_expr_latex(a), format_expr_latex(b)),
+            BinaryOp::Div => format!(
+                "\\frac{{{}}}{{{}}}",
+                format_expr_latex(a),
+                format_expr_latex(b)
+            ),
             BinaryOp::Pow => format!("{}^{{{}}}", format_expr_latex(a), format_expr_latex(b)),
         },
         Expr::Function(name, arg) => {
@@ -39,7 +44,10 @@ pub fn format_expr_latex(expr: &Expr) -> String {
 
 pub fn format_expr(expr: &Expr) -> String {
     match expr {
-        Expr::Number(n) => n.to_string(),
+        Expr::Number(n) => {
+            let val = n.0;
+            val.to_string()
+        }
         Expr::Variable(v) => v.clone(),
         Expr::UnaryOp(UnaryOp::Neg, e) => format!("-{}", format_expr(e)),
         Expr::BinaryOp(op, a, b) => {

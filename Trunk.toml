@@ -1,5 +1,12 @@
+[build]
+dist = "dist"
+filehash = false
+
 [[copy]]
 source = "styles.css"
+dest = "styles.css"
 
 [[copy]]
 source = "katex_render.js"
+dest = "katex_render.js"
+

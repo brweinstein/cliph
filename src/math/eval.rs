@@ -7,9 +7,12 @@ pub fn evaluate(expr: &Expr) -> f64 {
 
 pub fn evaluate_with_env(expr: &Expr, vars: &HashMap<String, f64>) -> f64 {
     match expr {
-        Expr::Number(n) => *n,
+        Expr::Number(n) => n.0, // unwrap OrderedFloat<f64> here
+
         Expr::Variable(name) => *vars.get(name).unwrap_or(&0.0),
+
         Expr::UnaryOp(UnaryOp::Neg, e) => -evaluate_with_env(e, vars),
+
         Expr::BinaryOp(op, a, b) => {
             let left = evaluate_with_env(a, vars);
             let right = evaluate_with_env(b, vars);
@@ -21,6 +24,7 @@ pub fn evaluate_with_env(expr: &Expr, vars: &HashMap<String, f64>) -> f64 {
                 BinaryOp::Pow => left.powf(right),
             }
         }
+
         Expr::Function(f, arg) => {
             let x = evaluate_with_env(arg, vars);
             match f.as_str() {

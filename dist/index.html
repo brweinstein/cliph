@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>Cliph – Graphing Calculator</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <title>Cliph – Graphing Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- KaTeX styles -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" />
+  <!-- Local stylesheet bundled by Trunk -->
+  <link rel="stylesheet" href="/styles.css" integrity="sha384-O58IVfNxLMs/BFwrw90HvJeDATTZdDxFfZiq3jl4PdwMSAZOLcVr5n+yD0Ate5hb"/>
 
-    <!-- KaTeX scripts loaded normally -->
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body);"></script>
-<link rel="modulepreload" href="/cliph-f7aa16877484bb8b.js" crossorigin="anonymous" integrity="sha384-j2lGmif5jzOHr5QDKMUSZQxYNN+J7mqX/IdbdE2EVZTxLa/zAbYNZXM4z1SIIXgy"><link rel="preload" href="/cliph-f7aa16877484bb8b_bg.wasm" crossorigin="anonymous" integrity="sha384-hhxn2Baen0YQWHed6uqOIWnOUqZU6Hgg/cxGuXzUG08IpO0dyw8KquAaB/9//ZJO" as="fetch" type="application/wasm"></head>
+  <!-- KaTeX CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" />
+
+  <!-- KaTeX JS -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Local KaTeX helper script -->
+  <script src="/katex_render.js" defer integrity="sha384-iKj4zRbidUwLXbvSZI1DHG8SNkKvjcpWyNM0p7ZUV1DLMZrR6MXwqo7H6lFLBSed"></script>
+<link rel="modulepreload" href="/cliph.js" crossorigin="anonymous" integrity="sha384-5qLbXEVJqpEE3lw7/NK7eHkmiju8ZI0QLYjOFAzMESXx8P3NT1TyZlljvOnbypsU"><link rel="preload" href="/cliph_bg.wasm" crossorigin="anonymous" integrity="sha384-S1hiKtJOxkXMSKMhsLCbzuUIYAazLYwuVu+rWMKqrulJUPv9uo31F+ddPeY3OsY+" as="fetch" type="application/wasm"></head>
 <body>
-    <main></main>
+  <main></main>
 
-    <script type="module">
-        import init from './pkg/cliph.js';
-        init();
-    </script>
+  <!-- WASM entrypoint -->
+  <script type="module">
+    import init from './cliph.js';
+    init();
+  </script>
 
 <script type="module">
-import init, * as bindings from '/cliph-f7aa16877484bb8b.js';
-const wasm = await init({ module_or_path: '/cliph-f7aa16877484bb8b_bg.wasm' });
+import init, * as bindings from '/cliph.js';
+const wasm = await init({ module_or_path: '/cliph_bg.wasm' });
 
 
 window.wasmBindings = bindings;
